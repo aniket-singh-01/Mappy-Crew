@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notification System</title>
+    <!-- Bootstrap Dark Theme CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Body with blue-themed background */
+      body {
+        background-color: #0d3b66; /* Dark Blue background */
+        color: #f8f9fa; /* Light text */
+      }
+
+      /* Navbar and footer with blue shades */
+      .navbar {
+        background-color: #1c4966; /* Mid Blue */
+      }
+
+      .footer {
+        background-color: #102a43; /* Dark Blue Footer */
+      }
+
+      /* Blue-themed alert box for notifications */
+      .alert {
+        background-color: #27496d; /* Alert with a soft blue */
+        color: #f8f9fa; /* Light text */
+      }
+
+      /* Notification container with proper image fitting */
+      .notification-img {
+        height: 400px; /* Fix image height */
+        width: 100%; /* Full width */
+        object-fit: contain; /* Fit image properly within the container */
+        border: 2px solid #2e86de; /* Light Blue border for the image */
+        border-radius: 8px; /* Rounded corners */
+      }
+
+      /* Blue shade for carousel captions */
+      .carousel-caption {
+        background-color: rgba(
+          0,
+          61,
+          89,
+          0.6
+        ); /* Dark Blue overlay for captions */
+        padding: 10px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Notification System</a>
+      </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mt-5">
+      <div class="alert" role="alert">
+        <h4 class="alert-heading">Random Notification</h4>
+
+        <!-- Image Notification Area -->
+        <div id="notification-container">
+          <img
+            id="notification-image"
+            class="notification-img"
+            alt="Notification Image"
+          />
+          <div class="carousel-caption d-none d-md-block">
+            <h5 id="notification-title"></h5>
+            <p id="notification-id"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center py-3 mt-5">
+      <p class="text-light">
+        &copy; 2024 Notification System. All rights reserved.
+      </p>
+    </footer>
+
+    <!-- Bootstrap JS CDN (optional for interactive components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Array of product notifications
+      const notifications = [
+        {
+          id: "prod_123",
+          name: "Product 1",
+          image: "{{ url_for('static', filename='images/product123.jpeg') }}",
+        },
+        {
+          id: "prod_456",
+          name: "Product 2",
+          image: "{{ url_for('static', filename='images/product456.jpeg') }}",
+        },
+        {
+          id: "prod_789",
+          name: "Product 3",
+          image: "{{ url_for('static', filename='images/product789.jpeg') }}",
+        },
+        {
+          id: "prod_10",
+          name: "Product 4",
+          image: "{{ url_for('static', filename='images/product10.jpeg') }}",
+        },
+        {
+          id: "prod_89",
+          name: "Product 5",
+          image: "{{ url_for('static', filename='images/product89.jpeg') }}",
+        },
+      ];
+
+      // Function to display random notification
+      function showRandomNotification() {
+        // Select a random notification
+        const randomNotification =
+          notifications[Math.floor(Math.random() * notifications.length)];
+
+        // Update the notification container with the selected image and details
+        document.getElementById("notification-image").src =
+          randomNotification.image;
+        document.getElementById("notification-title").textContent =
+          randomNotification.name;
+        document.getElementById(
+          "notification-id"
+        ).textContent = `Product ID: ${randomNotification.id}`;
+      }
+
+      // Show a random notification every 15 seconds
+      setInterval(showRandomNotification, 5000);
+
+      // Initially load a random notification when the page loads
+      window.onload = showRandomNotification;
+    </script>
+  </body>
+</html>
